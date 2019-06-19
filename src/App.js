@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Display from './components/Display';
 import Keypad from './components/Keypad';
+import operators from './const/operators';
 import './App.scss';
 
 const initialState = {
@@ -79,11 +80,11 @@ class App extends Component {
     const { displayValue, operator, storedValue } = this.state;
     const nextValue = parseFloat(displayValue);
     const operations = {
-      '/': prevValue => prevValue / nextValue,
-      '*': prevValue => prevValue * nextValue,
-      '-': prevValue => prevValue - nextValue,
-      '+': prevValue => prevValue + nextValue,
-      '=': () => nextValue,
+      [operators[0].id]: prevValue => prevValue / nextValue,
+      [operators[1].id]: prevValue => prevValue * nextValue,
+      [operators[2].id]: prevValue => prevValue - nextValue,
+      [operators[3].id]: prevValue => prevValue + nextValue,
+      [operators[4].id]: () => nextValue,
     };
 
     if (storedValue === null) {

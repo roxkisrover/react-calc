@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
+import operators from '../../const/operators';
 import './style.scss';
 
 function Keypad({
@@ -14,7 +15,7 @@ function Keypad({
   const renderDigitButtons = () => {
     const buttons = [];
 
-    for (let i = 1; i <= 9; i += 1) {
+    for (let i = 1; i < 10; i += 1) {
       buttons.push(
         <Button
           key={`digit-${i}`}
@@ -29,13 +30,12 @@ function Keypad({
   };
 
   const renderOperatorButtons = () => {
-    const operators = ['/', '*', '-', '+'];
     const buttons = operators.map(operator => (
       <Button
-        key={`operator-${operator}`}
+        key={`operator-${operator.id}`}
         modifiers={['operator']}
-        handleClick={() => performOperation(operator)}
-        text={operator}
+        handleClick={() => performOperation(operator.id)}
+        text={operator.sign}
       />
     ));
 
@@ -76,14 +76,7 @@ function Keypad({
           {renderDigitButtons()}
         </div>
       </div>
-      <div className="operator-keys">
-        {renderOperatorButtons()}
-        <Button
-          modifiers={['operator', 'equals']}
-          handleClick={() => performOperation('=')}
-          text="="
-        />
-      </div>
+      <div className="operator-keys">{renderOperatorButtons()}</div>
     </div>
   );
 }

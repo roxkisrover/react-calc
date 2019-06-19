@@ -16,9 +16,17 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
+
+  .key:first-child {
+    border-bottom-left-radius: 8px;
+  }
 }
 
 .operator-keys {
   display: flex;
   flex-direction: column;
+
+  .key:last-child {
+    border-bottom-right-radius: 8px;
+  }
 }
