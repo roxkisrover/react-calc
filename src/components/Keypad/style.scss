@@ -1,0 +1,24 @@
+.keypad {
+  display: flex;
+  height: 400px;
+  touch-action: manipulation;
+}
+
+.input-keys {
+  width: 240px;
+}
+
+.function-keys {
+  display: flex;
+}
+
+.digit-keys {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+}
+
+.operator-keys {
+  display: flex;
+  flex-direction: column;
+}

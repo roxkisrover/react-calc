@@ -1,242 +1,130 @@
 import React, { Component } from 'react';
-import Display from './Display';
+import Display from './components/Display';
+import Keypad from './components/Keypad';
 import './App.scss';
 
 const initialState = {
-	displayValue: '0',
-	isWaitingForOperand: false,
-	operator: null,
-	storedValue: null
+  displayValue: '0',
+  isWaitingForOperand: false,
+  operator: null,
+  storedValue: null,
 };
 
 class App extends Component {
-	state = {
-		...initialState
-	};
+  constructor(props) {
+    super(props);
 
-	clearDisplay = () => {
-		this.setState({
-			...initialState
-		});
-	}
+    this.state = {
+      ...initialState,
+    };
+  }
 
-	toggleSign = () => {
-		const { displayValue } = this.state;
+  clearDisplay = () => {
+    this.setState({
+      ...initialState,
+    });
+  };
 
-		if (parseFloat(displayValue) !== 0) {
-			this.setState({
-				displayValue: displayValue.charAt(0) === '-' ? displayValue.substr(1) : '-' + displayValue
-			});
-		}
-	}
+  toggleSign = () => {
+    const { displayValue } = this.state;
 
-	inputPercent = () => {
-		const { displayValue } = this.state;
-		const value = parseFloat(displayValue);
+    if (parseFloat(displayValue) !== 0) {
+      this.setState({
+        displayValue: displayValue.charAt(0) === '-' ? displayValue.substr(1) : `-${displayValue}`,
+      });
+    }
+  };
 
-		this.setState({
-			displayValue: String(value / 100)
-		});
-	}
+  inputPercent = () => {
+    const { displayValue } = this.state;
+    const value = parseFloat(displayValue);
 
-	inputDigit = (digit) => {
-		const { displayValue, isWaitingForOperand } = this.state;
+    this.setState({
+      displayValue: String(value / 100),
+    });
+  };
 
-		if (isWaitingForOperand) {
-			this.setState({
-				displayValue: digit,
-				isWaitingForOperand: false
-			});
-		}
-		else {
-			this.setState({
-				displayValue: displayValue === '0' ? digit : `${displayValue}${digit}`
-			});
-		}
-	}
+  inputDigit = (digit) => {
+    const { displayValue, isWaitingForOperand } = this.state;
 
-	inputDot = () => {
-		const { displayValue, isWaitingForOperand } = this.state;
+    if (isWaitingForOperand) {
+      this.setState({
+        displayValue: digit,
+        isWaitingForOperand: false,
+      });
+    } else {
+      this.setState({
+        displayValue: displayValue === '0' ? digit : `${displayValue}${digit}`,
+      });
+    }
+  };
 
-		if (isWaitingForOperand) {
-			this.setState({
-				displayValue: '0.',
-				isWaitingForOperand: false
-			});
-		}
-		else if (displayValue.indexOf('.') === -1) {
-			this.setState({
-				displayValue: displayValue + '.',
-				isWaitingForOperand: false
-			});
-		}
-	}
+  inputDot = () => {
+    const { displayValue, isWaitingForOperand } = this.state;
 
-	performOperation = (nextOperator) => {
-		const { displayValue, operator, storedValue } = this.state;
-		const nextValue = parseFloat(displayValue);
-		const operations = {
-			'/': (prevValue, nextValue) => prevValue / nextValue,
-			'*': (prevValue, nextValue) => prevValue * nextValue,
-			'-': (prevValue, nextValue) => prevValue - nextValue,
-			'+': (prevValue, nextValue) => prevValue + nextValue,
-			'=': (_prevValue, nextValue) => nextValue
-		};
+    if (isWaitingForOperand) {
+      this.setState({
+        displayValue: '0.',
+        isWaitingForOperand: false,
+      });
+    } else if (displayValue.indexOf('.') === -1) {
+      this.setState({
+        displayValue: `${displayValue}.`,
+        isWaitingForOperand: false,
+      });
+    }
+  };
 
-		if (storedValue === null) {
-			this.setState({
-				storedValue: nextValue
-			});
-		}
-		else if (operator) {
-			const prevValue = storedValue || 0;
-			const computedValue = operations[operator](prevValue, nextValue);
+  performOperation = (nextOperator) => {
+    const { displayValue, operator, storedValue } = this.state;
+    const nextValue = parseFloat(displayValue);
+    const operations = {
+      '/': prevValue => prevValue / nextValue,
+      '*': prevValue => prevValue * nextValue,
+      '-': prevValue => prevValue - nextValue,
+      '+': prevValue => prevValue + nextValue,
+      '=': () => nextValue,
+    };
 
-			this.setState({
-				storedValue: computedValue,
-				displayValue: String(computedValue)
-			});
-		}
+    if (storedValue === null) {
+      this.setState({
+        storedValue: nextValue,
+      });
+    } else if (operator) {
+      const prevValue = storedValue || 0;
+      const computedValue = operations[operator](prevValue, nextValue);
 
-		this.setState({
-			isWaitingForOperand: true,
-			operator: nextOperator
-		});
-	}
+      this.setState({
+        storedValue: computedValue,
+        displayValue: String(computedValue),
+      });
+    }
 
-	render() {
-		return (
-			<div className="container">
-				<div className="calculator">
-					<Display>{this.state.displayValue}</Display>
-					<div className="keypad">
-						<div className="input-keys">
-							<div className="function-keys">
-								<button
-									className="key key--function"
-									onClick={this.clearDisplay}
-								>
-									AC
-								</button>
-								<button
-									className="key key--function"
-									onClick={this.toggleSign}
-								>
-									+/-
-								</button>
-								<button
-									className="key key--function"
-									onClick={this.inputPercent}
-								>
-									%
-								</button>
-							</div>
-							<div className="digit-keys">
-								<button
-                  className="key key--digit key--zero"
-									onClick={() => this.inputDigit('0')}
-								>
-									0
-								</button>
-								<button
-									className="key key--digit key--dot"
-									onClick={this.inputDot}
-								>
-									.
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('1')}
-								>
-									1
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('2')}
-								>
-									2
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('3')}
-								>
-									3
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('4')}
-								>
-									4
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('5')}
-								>
-									5
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('6')}
-								>
-									6
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('7')}
-								>
-									7
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('8')}
-								>
-									8
-								</button>
-								<button
-									className="key key--digit"
-									onClick={() => this.inputDigit('9')}
-								>
-									9
-								</button>
-							</div>
-						</div>
-						<div className="operator-keys">
-							<button
-								className="key key--operator"
-								onClick={() => this.performOperation('/')}
-							>
-								÷
-							</button>
-							<button
-								className="key key--operator"
-								onClick={() => this.performOperation('*')}
-							>
-								×
-							</button>
-							<button
-								className="key key--operator"
-								onClick={() => this.performOperation('-')}
-							>
-								−
-							</button>
-							<button
-								className="key key--operator"
-								onClick={() => this.performOperation('+')}
-							>
-								+
-							</button>
-							<button
-								className="key key--operator key--equals"
-								onClick={() => this.performOperation('=')}
-							>
-								=
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
+    this.setState({
+      isWaitingForOperand: true,
+      operator: nextOperator,
+    });
+  };
+
+  render() {
+    const { displayValue } = this.state;
+
+    return (
+      <div className="container">
+        <div className="calculator">
+          <Display>{displayValue}</Display>
+          <Keypad
+            clearDisplay={this.clearDisplay}
+            toggleSign={this.toggleSign}
+            inputPercent={this.inputPercent}
+            inputDigit={this.inputDigit}
+            inputDot={this.inputDot}
+            performOperation={this.performOperation}
+          />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
