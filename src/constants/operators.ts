@@ -1,4 +1,4 @@
-const operators = [
+export const operators = [
   {
     id: 'divide',
     sign: '÷',
@@ -8,7 +8,7 @@ const operators = [
     sign: '×',
   },
   {
-    id: 'substract',
+    id: 'subtract',
     sign: '−',
   },
   {
@@ -19,6 +19,4 @@ const operators = [
     id: 'equals',
     sign: '=',
   },
-];
-
-export default operators;
+] as const;
