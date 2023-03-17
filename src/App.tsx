@@ -58,9 +58,11 @@ const App = () => {
     if (isWaitingForOperand) {
       setDisplayValue('0.');
       setIsWaitingForOperand(false);
-    } else if (!displayValue.includes('.')) {
+      return;
+    }
+
+    if (!displayValue.includes('.')) {
       setDisplayValue((prev) => `${prev}.`);
-      setIsWaitingForOperand(false);
     }
   }, [isWaitingForOperand, displayValue]);
 
@@ -71,8 +73,7 @@ const App = () => {
       if (storedValue === null) {
         setStoredValue(nextValue);
       } else if (operator) {
-        const prevValue = storedValue ?? 0;
-        const computedValue = operations[operator](prevValue);
+        const computedValue = operations[operator](storedValue);
 
         setStoredValue(computedValue);
         setDisplayValue(String(computedValue));
