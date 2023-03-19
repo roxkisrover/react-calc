@@ -13,9 +13,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "lint": "eslint . --ext .ts,.tsx,.js,jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,jsx --fix",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -23,6 +24,7 @@
     "styled-components": "^5.3.9"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
@@ -34,7 +36,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5",
     "vite": "^4.1.4"

@@ -9,5 +9,8 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "es5",
-  "useTabs": false
+  "useTabs": false,
+  "importOrder": ["^react/(.*)$", "<THIRD_PARTY_MODULES>", "^(components|constants|layouts|styles)/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": false
 }
