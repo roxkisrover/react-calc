@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  touch-action: manipulation;
   display: flex;
   height: 320px;
-  touch-action: manipulation;
 `;
 
 export const InputKeys = styled.div`
@@ -16,8 +16,7 @@ export const FuncKeys = styled.div`
 
 export const DigitKeys = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap-reverse;
+  flex-flow: row wrap-reverse;
 `;
 
 export const OperatorKeys = styled.div`
