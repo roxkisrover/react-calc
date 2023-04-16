@@ -1,7 +1,6 @@
 {
   "env": {
     "browser": true,
-    "node": true,
     "es2021": true
   },
   "parser": "@typescript-eslint/parser",
@@ -15,6 +14,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
@@ -23,20 +24,15 @@
     "react": {
       "version": "detect"
     },
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      },
-      "typescript": {
-        "project": ["tsconfig.json"]
-      }
+      "typescript": true,
+      "node": true
     }
   },
   "rules": {
     "react/react-in-jsx-scope": "off",
+    "camelcase": "error",
+    "spaced-comment": "error",
     "no-duplicate-imports": "error"
   }
 }

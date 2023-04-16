@@ -30,13 +30,13 @@ const App = () => {
     setIsWaitingForOperand(false);
   }, []);
 
-  const toggleSign = useCallback(() => {
+  const toggleSign = () => {
     const value = Number.parseFloat(displayValue);
 
     if (value !== 0) {
       setDisplayValue((prev) => (prev.startsWith('-') ? prev.substring(1) : `-${displayValue}`));
     }
-  }, [displayValue]);
+  };
 
   const inputPercent = useCallback(() => {
     setDisplayValue((prev) => String(Number.parseFloat(prev) / 100));
@@ -54,7 +54,7 @@ const App = () => {
     [isWaitingForOperand]
   );
 
-  const inputDot = useCallback(() => {
+  const inputDot = () => {
     if (isWaitingForOperand) {
       setDisplayValue('0.');
       setIsWaitingForOperand(false);
@@ -64,26 +64,23 @@ const App = () => {
     if (!displayValue.includes('.')) {
       setDisplayValue((prev) => `${prev}.`);
     }
-  }, [isWaitingForOperand, displayValue]);
+  };
 
-  const performOperation = useCallback(
-    (nextOperator: keyof typeof operations) => {
-      const nextValue = Number.parseFloat(displayValue);
+  const performOperation = (nextOperator: keyof typeof operations) => {
+    const nextValue = Number.parseFloat(displayValue);
 
-      if (storedValue === null) {
-        setStoredValue(nextValue);
-      } else if (operator) {
-        const computedValue = operations[operator](storedValue);
+    if (storedValue === null) {
+      setStoredValue(nextValue);
+    } else if (operator) {
+      const computedValue = operations[operator](storedValue);
 
-        setStoredValue(computedValue);
-        setDisplayValue(String(computedValue));
-      }
+      setStoredValue(computedValue);
+      setDisplayValue(String(computedValue));
+    }
 
-      setOperator(nextOperator);
-      setIsWaitingForOperand(true);
-    },
-    [displayValue, storedValue, operations, operator]
-  );
+    setOperator(nextOperator);
+    setIsWaitingForOperand(true);
+  };
 
   return (
     <Calculator>
