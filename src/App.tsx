@@ -30,13 +30,13 @@ const App = () => {
     setIsWaitingForOperand(false);
   }, []);
 
-  const toggleSign = useCallback(() => {
+  const toggleSign = () => {
     const value = Number.parseFloat(displayValue);
 
     if (value !== 0) {
       setDisplayValue((prev) => (prev.startsWith('-') ? prev.substring(1) : `-${displayValue}`));
     }
-  }, [displayValue]);
+  };
 
   const inputPercent = useCallback(() => {
     setDisplayValue((prev) => String(Number.parseFloat(prev) / 100));
@@ -54,35 +54,33 @@ const App = () => {
     [isWaitingForOperand]
   );
 
-  const inputDot = useCallback(() => {
+  const inputDot = () => {
     if (isWaitingForOperand) {
       setDisplayValue('0.');
       setIsWaitingForOperand(false);
-    } else if (!displayValue.includes('.')) {
-      setDisplayValue((prev) => `${prev}.`);
-      setIsWaitingForOperand(false);
+      return;
     }
-  }, [isWaitingForOperand, displayValue]);
 
-  const performOperation = useCallback(
-    (nextOperator: keyof typeof operations) => {
-      const nextValue = Number.parseFloat(displayValue);
+    if (!displayValue.includes('.')) {
+      setDisplayValue((prev) => `${prev}.`);
+    }
+  };
 
-      if (storedValue === null) {
-        setStoredValue(nextValue);
-      } else if (operator) {
-        const prevValue = storedValue ?? 0;
-        const computedValue = operations[operator](prevValue);
+  const performOperation = (nextOperator: keyof typeof operations) => {
+    const nextValue = Number.parseFloat(displayValue);
 
-        setStoredValue(computedValue);
-        setDisplayValue(String(computedValue));
-      }
+    if (storedValue === null) {
+      setStoredValue(nextValue);
+    } else if (operator) {
+      const computedValue = operations[operator](storedValue);
 
-      setOperator(nextOperator);
-      setIsWaitingForOperand(true);
-    },
-    [displayValue, storedValue, operations, operator]
-  );
+      setStoredValue(computedValue);
+      setDisplayValue(String(computedValue));
+    }
+
+    setOperator(nextOperator);
+    setIsWaitingForOperand(true);
+  };
 
   return (
     <Calculator>

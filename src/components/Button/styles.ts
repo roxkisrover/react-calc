@@ -5,29 +5,29 @@ import { BUTTON_VARIANTS } from './constants';
 const variantStyles = (theme: DefaultTheme, variant: BUTTON_VARIANTS) =>
   ({
     [BUTTON_VARIANTS.FUNC]: css`
-      color: #e2e2e2;
       font-size: 1.75em;
-      background: #404243;
+      color: ${({ theme }) => theme.colors.platinum};
+      background: ${({ theme }) => theme.colors.arsenic};
 
       &:active {
-        color: #e7e7e7;
-        background: #616163;
+        color: ${({ theme }) => theme.colors.platinum};
+        background: ${({ theme }) => theme.colors.graniteGray};
       }
     `,
     [BUTTON_VARIANTS.DIGIT]: css`
-      color: #e7e7e7;
       font-size: 2em;
-      background: #616163;
+      color: ${({ theme }) => theme.colors.platinum};
+      background: ${({ theme }) => theme.colors.graniteGray};
 
       &:active {
-        color: #f9f9f9;
-        background: #a3a4a4;
+        color: ${({ theme }) => theme.colors.ghostWhite};
+        background: ${({ theme }) => theme.colors.quickSilver};
       }
     `,
     [BUTTON_VARIANTS.OPERATOR]: css`
-      color: #fff0df;
       font-size: 2.75em;
-      background: #fd9e2b;
+      color: ${({ theme }) => theme.colors.cornsilk};
+      background: ${({ theme }) => theme.colors.deepSaffron};
       border-right: 0;
 
       &:last-child {
@@ -35,52 +35,59 @@ const variantStyles = (theme: DefaultTheme, variant: BUTTON_VARIANTS) =>
       }
 
       &:active {
-        color: #fbf6ef;
-        background: #c97d20;
+        color: ${({ theme }) => theme.colors.seashell};
+        background: ${({ theme }) => theme.colors.ochre};
       }
     `,
     [BUTTON_VARIANTS.ZERO]: css`
-      color: #e7e7e7;
-      background: #616163;
       width: 160px;
       padding-left: 32px;
+
       font-size: 2em;
+      color: ${({ theme }) => theme.colors.platinum};
       text-align: left;
+
+      background: ${({ theme }) => theme.colors.graniteGray};
       border-bottom-left-radius: 10px;
 
       &:active {
-        color: #f9f9f9;
-        background: #a3a4a4;
+        color: ${({ theme }) => theme.colors.ghostWhite};
+        background: ${({ theme }) => theme.colors.quickSilver};
       }
     `,
     [BUTTON_VARIANTS.DOT]: css`
-      color: #e7e7e7;
-      background: #616163;
       font-size: 2.75em;
+      color: ${({ theme }) => theme.colors.platinum};
+      background: ${({ theme }) => theme.colors.graniteGray};
 
       &:active {
-        color: #f9f9f9;
-        background: #a3a4a4;
+        color: ${({ theme }) => theme.colors.ghostWhite};
+        background: ${({ theme }) => theme.colors.quickSilver};
       }
     `,
   }[variant]);
 
 export const Button = styled.button<{ variant: BUTTON_VARIANTS }>`
+  cursor: pointer;
+  user-select: none;
+
   display: block;
+
   width: 80px;
   height: 64px;
   padding: 0;
+
   font-weight: 300;
   line-height: 64px;
   text-align: center;
-  border-top: 1px solid #2c2f30;
-  border-right: 1px solid #2c2f30;
+
+  border-top: 1px solid ${({ theme }) => theme.colors.darkCharcoal};
+  border-right: 1px solid ${({ theme }) => theme.colors.darkCharcoal};
   border-bottom: 0;
   border-left: 0;
   outline: none;
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.5);
+
+  -webkit-tap-highlight-color: rgb(0 0 0 / 50%);
 
   ${({ theme, variant }) => variantStyles(theme, variant)}
 `;

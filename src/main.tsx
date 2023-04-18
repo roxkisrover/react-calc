@@ -1,5 +1,4 @@
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyles } from 'styles/globalStyles';
@@ -7,11 +6,12 @@ import { theme } from 'styles/theme';
 
 import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <App />
-    </ThemeProvider>
-  </StrictMode>
+const domNode = document.getElementById('root') as HTMLDivElement;
+const root = createRoot(domNode);
+
+root.render(
+  <ThemeProvider theme={theme}>
+    <GlobalStyles />
+    <App />
+  </ThemeProvider>
 );
