@@ -40,7 +40,7 @@
     "lint-staged": "^13.2.1",
     "postcss-styled-syntax": "^0.4.0",
     "prettier": "^2.8.7",
-    "stylelint": "^15.5.0",
+    "stylelint": "^15.10.1",
     "stylelint-config-clean-order": "^5.0.1",
     "stylelint-config-standard": "^33.0.0",
     "typescript": "^5.0.4",
