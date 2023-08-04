@@ -1,7 +1,13 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
-  "customSyntax": "postcss-styled-syntax",
+  "extends": ["@linaria/stylelint-config-standard-linaria", "stylelint-config-clean-order"],
   "rules": {
-    "no-empty-source": null
+    "no-empty-source": null,
+    "string-quotes": "single",
+    "value-keyword-case": ["lower", {
+      "ignoreProperties": ["text-rendering"]
+    }],
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }]
   }
 }

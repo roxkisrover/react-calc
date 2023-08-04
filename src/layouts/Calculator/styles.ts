@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@linaria/react';
 
 export const Container = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const Calculator = styled.div`
   width: 320px;
   height: 440px;
 
-  border: 1px solid ${({ theme }) => theme.colors.darkCharcoal};
+  border: 1px solid var(--color-dark-charcoal);
   border-radius: 10px;
   box-shadow: 0 22px 70px 4px rgb(0 0 0 / 56%);
 `;
