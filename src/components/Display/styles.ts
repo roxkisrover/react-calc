@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@linaria/react';
 
 export const Container = styled.div`
   flex: 1;
@@ -6,9 +6,9 @@ export const Container = styled.div`
   font-size: 5em;
   font-weight: 100;
   line-height: 120px;
-  color: ${({ theme }) => theme.colors.white};
+  color: var(--color-white);
 
-  background: ${({ theme }) => theme.colors.darkCharcoal};
+  background-color: var(--color-dark-charcoal);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `;

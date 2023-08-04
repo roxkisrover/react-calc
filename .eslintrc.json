@@ -6,7 +6,9 @@
     "plugin:import/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": ["prettier"],
+  "plugins": [
+    "prettier"
+  ],
   "env": {
     "browser": true,
     "node": true
@@ -21,7 +23,6 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
     },
@@ -35,7 +36,14 @@
     "spaced-comment": 2,
     "no-duplicate-imports": 2,
     "@typescript-eslint/no-empty-interface": 0,
-    "import/no-unresolved": [2, { "ignore": [".svg"] }],
+    "import/no-unresolved": [
+      2,
+      {
+        "ignore": [
+          ".svg"
+        ]
+      }
+    ],
     "prettier/prettier": 2
   }
 }

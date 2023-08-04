@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import * as SC from './styles';
 
