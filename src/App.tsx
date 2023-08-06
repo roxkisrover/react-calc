@@ -5,7 +5,7 @@ import Calculator from 'layouts/Calculator';
 
 const App = () => {
   const {
-    displayValue,
+    displayedValue,
     clearAll,
     toggleSign,
     inputPercent,
@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <Calculator>
-      <Display displayValue={displayValue} />
+      <Display displayedValue={displayedValue} />
       <Keypad
         clearAll={clearAll}
         toggleSign={toggleSign}

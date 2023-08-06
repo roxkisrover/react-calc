@@ -1,51 +1,42 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
-import { operators } from 'constants/operators';
+import { OPERATORS } from 'constants/operators';
+import { operations } from 'helpers/operations';
 
 export const useCalculation = () => {
-  const [displayValue, setDisplayValue] = useState<string>('0');
-  const [storedValue, setStoredValue] = useState<number | null>(null);
+  const [displayedValue, setDisplayedValue] = useState<string>('0');
+  const [storedValue, setStoredValue] = useState<string | null>(null);
   const [isAwaitingOperand, setIsAwaitingOperand] = useState<boolean>(false);
-  const [operator, setOperator] = useState<(typeof operators)[number]['id'] | null>(null);
-
-  const operations = useMemo(() => {
-    const nextValue = Number.parseFloat(displayValue);
-
-    return {
-      [operators[0].id]: (prevValue: number) => prevValue / nextValue,
-      [operators[1].id]: (prevValue: number) => prevValue * nextValue,
-      [operators[2].id]: (prevValue: number) => prevValue - nextValue,
-      [operators[3].id]: (prevValue: number) => prevValue + nextValue,
-      [operators[4].id]: () => nextValue,
-    };
-  }, [displayValue]);
+  const [operator, setOperator] = useState<(typeof OPERATORS)[number]['id'] | null>(null);
 
   const clearAll = useCallback(() => {
-    setDisplayValue('0');
+    setDisplayedValue('0');
     setStoredValue(null);
     setOperator(null);
     setIsAwaitingOperand(false);
   }, []);
 
   const toggleSign = useCallback(() => {
-    const value = Number.parseFloat(displayValue);
+    const value = Number.parseFloat(displayedValue);
 
     if (value !== 0) {
-      setDisplayValue((prev) => (prev.startsWith('-') ? prev.substring(1) : `-${displayValue}`));
+      setDisplayedValue((prev) =>
+        prev.startsWith('-') ? prev.substring(1) : `-${displayedValue}`
+      );
     }
-  }, [displayValue]);
+  }, [displayedValue]);
 
   const inputPercent = useCallback(() => {
-    setDisplayValue((prev) => String(Number.parseFloat(prev) / 100));
+    setDisplayedValue((prev) => String(Number.parseFloat(prev) / 100));
   }, []);
 
   const inputDigit = useCallback(
     (digit: string) => {
       if (isAwaitingOperand) {
-        setDisplayValue(digit);
+        setDisplayedValue(digit);
         setIsAwaitingOperand(false);
       } else {
-        setDisplayValue((prev) => (prev === '0' ? digit : `${prev}${digit}`));
+        setDisplayedValue((prev) => (prev === '0' ? digit : `${prev}${digit}`));
       }
     },
     [isAwaitingOperand]
@@ -53,26 +44,24 @@ export const useCalculation = () => {
 
   const inputDot = useCallback(() => {
     if (isAwaitingOperand) {
-      setDisplayValue('0.');
+      setDisplayedValue('0.');
       setIsAwaitingOperand(false);
       return;
     }
 
-    if (!displayValue.includes('.')) {
-      setDisplayValue((prev) => `${prev}.`);
+    if (!displayedValue.includes('.')) {
+      setDisplayedValue((prev) => `${prev}.`);
     }
-  }, [isAwaitingOperand, displayValue]);
+  }, [isAwaitingOperand, displayedValue]);
 
   const performOperation = (nextOperator: keyof typeof operations) => {
-    const nextValue = Number.parseFloat(displayValue);
-
     if (storedValue === null) {
-      setStoredValue(nextValue);
+      setStoredValue(displayedValue);
     } else if (operator) {
-      const computedValue = operations[operator](storedValue);
+      const computedValue = operations[operator](storedValue, displayedValue);
 
       setStoredValue(computedValue);
-      setDisplayValue(String(computedValue));
+      setDisplayedValue(String(computedValue));
     }
 
     setOperator(nextOperator);
@@ -80,7 +69,7 @@ export const useCalculation = () => {
   };
 
   return {
-    displayValue,
+    displayedValue,
     clearAll,
     toggleSign,
     inputPercent,

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import Button, { BUTTON_VARIANTS } from 'components/Button';
-import { operators } from 'constants/operators';
+import { OPERATORS } from 'constants/operators';
 
 import * as SC from './styles';
 
@@ -11,7 +11,7 @@ interface IKeypadProps {
   inputPercent: () => void;
   inputDigit: (digit: string) => void;
   inputDot: () => void;
-  performOperation: (nextOperator: (typeof operators)[number]['id']) => void;
+  performOperation: (nextOperator: (typeof OPERATORS)[number]['id']) => void;
 }
 
 const Keypad = ({
@@ -37,7 +37,7 @@ const Keypad = ({
 
   const operatorButtons = useMemo(
     () =>
-      operators.map((operator) => (
+      OPERATORS.map((operator) => (
         <Button
           key={`operator-${operator.id}`}
           text={operator.sign}
