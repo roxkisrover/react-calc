@@ -20,6 +20,13 @@ export const useCalculation = () => {
     };
   }, [displayValue]);
 
+  const clearAll = useCallback(() => {
+    setDisplayValue('0');
+    setStoredValue(null);
+    setOperator(null);
+    setIsAwaitingOperand(false);
+  }, []);
+
   const toggleSign = () => {
     const value = Number.parseFloat(displayValue);
 
@@ -72,20 +79,13 @@ export const useCalculation = () => {
     setIsAwaitingOperand(true);
   };
 
-  const clearAll = useCallback(() => {
-    setDisplayValue('0');
-    setStoredValue(null);
-    setOperator(null);
-    setIsAwaitingOperand(false);
-  }, []);
-
   return {
     displayValue,
+    clearAll,
     toggleSign,
     inputPercent,
     inputDigit,
     inputDot,
     performOperation,
-    clearAll,
   };
 };

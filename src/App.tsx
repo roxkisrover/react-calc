@@ -6,24 +6,24 @@ import Calculator from 'layouts/Calculator';
 const App = () => {
   const {
     displayValue,
+    clearAll,
     toggleSign,
     inputPercent,
     inputDigit,
     inputDot,
     performOperation,
-    clearAll,
   } = useCalculation();
 
   return (
     <Calculator>
       <Display displayValue={displayValue} />
       <Keypad
+        clearAll={clearAll}
         toggleSign={toggleSign}
         inputPercent={inputPercent}
         inputDigit={inputDigit}
         inputDot={inputDot}
         performOperation={performOperation}
-        clearAll={clearAll}
       />
     </Calculator>
   );
