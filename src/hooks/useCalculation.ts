@@ -61,7 +61,7 @@ export const useCalculation = () => {
       const computedValue = operations[operator](storedValue, displayedValue);
 
       setStoredValue(computedValue);
-      setDisplayedValue(String(computedValue));
+      setDisplayedValue(computedValue);
     }
 
     setOperator(nextOperator);
