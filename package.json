@@ -51,7 +51,7 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "lint-staged": {
-    "src/**/*.(ts|tsx|js|jsx)": [
+    "src/**/*.(ts|tsx)": [
       "lint:scripts",
       "lint:styles",
       "format"
