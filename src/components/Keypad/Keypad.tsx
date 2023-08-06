@@ -6,21 +6,21 @@ import { operators } from 'constants/operators';
 import * as SC from './styles';
 
 interface IKeypadProps {
-  clearDisplay: () => void;
   toggleSign: () => void;
   inputPercent: () => void;
   inputDigit: (digit: string) => void;
   inputDot: () => void;
   performOperation: (nextOperator: (typeof operators)[number]['id']) => void;
+  clearAll: () => void;
 }
 
 const Keypad = ({
-  clearDisplay,
   toggleSign,
   inputPercent,
   inputDigit,
   inputDot,
   performOperation,
+  clearAll,
 }: IKeypadProps) => {
   const digitButtons = useMemo(
     () =>
@@ -52,7 +52,7 @@ const Keypad = ({
     <SC.Container>
       <SC.InputKeys>
         <SC.FuncKeys>
-          <Button text="AC" onClick={clearDisplay} variant={BUTTON_VARIANTS.FUNC} />
+          <Button text="AC" onClick={clearAll} variant={BUTTON_VARIANTS.FUNC} />
           <Button text="+/-" onClick={toggleSign} variant={BUTTON_VARIANTS.FUNC} />
           <Button text="%" onClick={inputPercent} variant={BUTTON_VARIANTS.FUNC} />
         </SC.FuncKeys>
