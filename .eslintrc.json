@@ -6,9 +6,7 @@
     "plugin:import/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": [
-    "prettier"
-  ],
+  "plugins": ["prettier"],
   "env": {
     "browser": true,
     "node": true
@@ -39,9 +37,7 @@
     "import/no-unresolved": [
       2,
       {
-        "ignore": [
-          ".svg"
-        ]
+        "ignore": [".svg"]
       }
     ],
     "prettier/prettier": 2
