@@ -27,13 +27,13 @@ export const useCalculation = () => {
     setIsAwaitingOperand(false);
   }, []);
 
-  const toggleSign = () => {
+  const toggleSign = useCallback(() => {
     const value = Number.parseFloat(displayValue);
 
     if (value !== 0) {
       setDisplayValue((prev) => (prev.startsWith('-') ? prev.substring(1) : `-${displayValue}`));
     }
-  };
+  }, [displayValue]);
 
   const inputPercent = useCallback(() => {
     setDisplayValue((prev) => String(Number.parseFloat(prev) / 100));
@@ -51,7 +51,7 @@ export const useCalculation = () => {
     [isAwaitingOperand]
   );
 
-  const inputDot = () => {
+  const inputDot = useCallback(() => {
     if (isAwaitingOperand) {
       setDisplayValue('0.');
       setIsAwaitingOperand(false);
@@ -61,7 +61,7 @@ export const useCalculation = () => {
     if (!displayValue.includes('.')) {
       setDisplayValue((prev) => `${prev}.`);
     }
-  };
+  }, [isAwaitingOperand, displayValue]);
 
   const performOperation = (nextOperator: keyof typeof operations) => {
     const nextValue = Number.parseFloat(displayValue);
