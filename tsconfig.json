@@ -19,6 +19,8 @@
     "paths": {
       "components/*": ["components/*"],
       "constants/*": ["constants/*"],
+      "helpers/*": ["helpers/*"],
+      "hooks/*": ["hooks/*"],
       "layouts/*": ["layouts/*"],
       "styles/*": ["styles/*"]
     }

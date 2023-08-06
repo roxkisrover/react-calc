@@ -1,4 +1,4 @@
-export const operators = [
+export const OPERATORS = [
   { id: 'divide', sign: '÷' },
   { id: 'multiply', sign: '×' },
   { id: 'subtract', sign: '−' },

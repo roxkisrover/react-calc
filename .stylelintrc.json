@@ -1,13 +1,20 @@
 {
   "extends": ["@linaria/stylelint-config-standard-linaria", "stylelint-config-clean-order"],
   "rules": {
-    "no-empty-source": null,
     "string-quotes": "single",
-    "value-keyword-case": ["lower", {
-      "ignoreProperties": ["text-rendering"]
-    }],
-    "selector-pseudo-class-no-unknown": [true, {
-      "ignorePseudoClasses": ["global"]
-    }]
+    "value-list-comma-newline-after": null,
+    "declaration-colon-newline-after": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "ignoreProperties": ["text-rendering"]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
   }
 }

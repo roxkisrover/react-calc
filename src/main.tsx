@@ -6,7 +6,7 @@ import { colors } from 'styles/theme';
 
 import App from './App';
 
-const domNode = document.getElementById('root') as HTMLDivElement;
+const domNode = document.getElementById('root') as HTMLElement;
 const root = createRoot(domNode);
 
 root.render(

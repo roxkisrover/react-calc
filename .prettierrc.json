@@ -13,7 +13,7 @@
   "importOrder": [
     "^react/(.*)$",
     "<THIRD_PARTY_MODULES>",
-    "^(components|constants|layouts|styles)/(.*)$",
+    "^(components|constants|helpers|hooks|layouts|styles)/(.*)$",
     "^[./]"
   ],
   "importOrderCaseInsensitive": true,

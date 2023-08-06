@@ -3,17 +3,17 @@ import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import * as SC from './styles';
 
 interface IDisplayProps {
-  displayValue: string;
+  displayedValue: string;
 }
 
-const Display = ({ displayValue }: IDisplayProps) => {
+const Display = ({ displayedValue }: IDisplayProps) => {
   const [scale, setScale] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
   const valueWithSpaceSeparators = useMemo(
-    () => displayValue.replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 '),
-    [displayValue]
+    () => displayedValue.replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1 '),
+    [displayedValue]
   );
 
   const adjustScale = useCallback(

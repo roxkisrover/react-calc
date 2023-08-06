@@ -1,21 +1,21 @@
 import { useMemo } from 'react';
 
 import Button, { BUTTON_VARIANTS } from 'components/Button';
-import { operators } from 'constants/operators';
+import { OPERATORS } from 'constants/operators';
 
 import * as SC from './styles';
 
 interface IKeypadProps {
-  clearDisplay: () => void;
+  clearAll: () => void;
   toggleSign: () => void;
   inputPercent: () => void;
   inputDigit: (digit: string) => void;
   inputDot: () => void;
-  performOperation: (nextOperator: (typeof operators)[number]['id']) => void;
+  performOperation: (nextOperator: (typeof OPERATORS)[number]['id']) => void;
 }
 
 const Keypad = ({
-  clearDisplay,
+  clearAll,
   toggleSign,
   inputPercent,
   inputDigit,
@@ -37,7 +37,7 @@ const Keypad = ({
 
   const operatorButtons = useMemo(
     () =>
-      operators.map((operator) => (
+      OPERATORS.map((operator) => (
         <Button
           key={`operator-${operator.id}`}
           text={operator.sign}
@@ -52,7 +52,7 @@ const Keypad = ({
     <SC.Container>
       <SC.InputKeys>
         <SC.FuncKeys>
-          <Button text="AC" onClick={clearDisplay} variant={BUTTON_VARIANTS.FUNC} />
+          <Button text="AC" onClick={clearAll} variant={BUTTON_VARIANTS.FUNC} />
           <Button text="+/-" onClick={toggleSign} variant={BUTTON_VARIANTS.FUNC} />
           <Button text="%" onClick={inputPercent} variant={BUTTON_VARIANTS.FUNC} />
         </SC.FuncKeys>
