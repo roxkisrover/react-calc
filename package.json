@@ -28,7 +28,7 @@
     "@babel/preset-typescript": "^7.22.5",
     "@linaria/stylelint-config-standard-linaria": "^4.5.1",
     "@linaria/vite": "^4.5.4",
-    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.1",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
